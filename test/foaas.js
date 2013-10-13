@@ -1,16 +1,24 @@
 var assert = require("assert"),
+    http = require("http"),
     sc = require("../");
 var testLocalPortMin = 8080;
 
 /*
  * setup
 */
-var server = require("http").createServer(function (req, res) {
+var server = http.createServer(function (req, res) {
     res.write("hello");
     res.end();
 });
 server.timeout = 2500;
 server.listen(testLocalPortMin);
+
+var serverReponseErr = http.createServer(function (req, res) {
+    res.writeHead(500);
+    res.end();
+});
+serverReponseErr.timeout = 2500;
+serverReponseErr.listen(testLocalPortMin + 1);
 
 /*
  * tests
@@ -92,6 +100,17 @@ function canConnectToPort() {
     });
 }
 
+function canHandleResponseErrors() {
+    sc.get("http://127.0.0.1:" + (testLocalPortMin + 1), function(err, text) {
+        serverReponseErr.close();
+        if (err) {
+            console.log("ok: canHandleResponseErrors");
+        } else {
+            assert.fail("expected error");
+        }
+    });
+}
+
 /*
  * start
 */
@@ -102,3 +121,4 @@ process.nextTick(canSpecifyHttpAccepts);
 process.nextTick(canParseJson);
 process.nextTick(canTransformResult);
 process.nextTick(canConnectToPort);
+process.nextTick(canHandleResponseErrors);
