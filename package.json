@@ -17,6 +17,6 @@
   "author": "Hendri Pretorius",
   "license": "MIT",
   "dependencies": {
-    
+    "defaultify": "0.0.2"
   }
 }

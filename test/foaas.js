@@ -22,5 +22,20 @@ function exceptionHandling() {
     });
 }
 
+function canSpecifyHttpAccepts() {
+    sc.get("http://foaas.com/off/Tom/Chris", {
+            accept: "json"
+        },
+        function(err, text) {
+            if (err) {
+                assert.fail(err);
+            } else {
+                assert.equal("{\"message\":\"Fuck off, Tom.\",\"subtitle\":\"- Chris\"}", text);
+                console.log("ok: canSpecifyHttpAccepts");
+            }
+        });
+}
+
 process.nextTick(simple);
 process.nextTick(exceptionHandling);
+process.nextTick(canSpecifyHttpAccepts);
