@@ -1,5 +1,5 @@
 {
-  "name": "serviceclient",
+  "name": "service-client",
   "version": "0.0.0",
   "description": "javascript wrapper function for http.request that returns parsed data in callback",
   "main": "index.js",
@@ -21,9 +21,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pretorh/serviceclient.git"
+    "url": "https://github.com/pretorh/service-client.git"
   },
   "bugs": {
-    "url": "https://github.com/pretorh/serviceclient/issues"
+    "url": "https://github.com/pretorh/service-client/issues"
   }
 }
