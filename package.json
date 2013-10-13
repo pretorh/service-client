@@ -18,5 +18,12 @@
   "license": "MIT",
   "dependencies": {
     "defaultify": "0.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pretorh/serviceclient.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pretorh/serviceclient/issues"
   }
 }
