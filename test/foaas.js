@@ -111,6 +111,20 @@ function canHandleResponseErrors() {
     });
 }
 
+function callbackGetsErrorsOfParseFunction() {
+    sc.get("http://127.0.0.1:" + testLocalPortMin, {
+            parse: function() { throw new Error("test parse error"); }
+        },
+        function(err, text) {
+            if (err) {
+                assert.equal("test parse error", err.message);
+                console.log("ok: callbackGetsErrorsOfParseFunction");
+            } else {
+                assert.fail("expected error");
+            }
+        });
+}
+
 /*
  * start
 */
@@ -122,3 +136,4 @@ process.nextTick(canParseJson);
 process.nextTick(canTransformResult);
 process.nextTick(canConnectToPort);
 process.nextTick(canHandleResponseErrors);
+process.nextTick(callbackGetsErrorsOfParseFunction);
