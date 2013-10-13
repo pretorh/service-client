@@ -30,7 +30,7 @@ function simple() {
 function exceptionHandling() {
     sc.get("not really a url", function(err, text) {
         if (err) {
-            console.log("ok: expect error");
+            console.log("ok: exceptionHandling");
         } else {
             assert.fail("no error returned");
         }
