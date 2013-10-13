@@ -1,0 +1,22 @@
+{
+  "name": "serviceclient",
+  "version": "0.0.0",
+  "description": "javascript wrapper function for http.request that returns parsed data in callback",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test/foaas.js"
+  },
+  "keywords": [
+    "service",
+    "client",
+    "http"
+  ],
+  "author": "Hendri Pretorius",
+  "license": "MIT",
+  "dependencies": {
+    
+  }
+}
