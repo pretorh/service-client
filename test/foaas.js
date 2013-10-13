@@ -52,8 +52,27 @@ function canParseJson() {
         });
 }
 
+function canTransformResult() {
+    sc.get("http://foaas.com/off/Tom/Chris", {
+            accept: "json",
+            parse: "json",
+            transform: function(data, callback) {
+                callback(null, data.message);
+            }
+        },
+        function(err, text) {
+            if (err) {
+                assert.fail(err);
+            } else {
+                assert.equal("Fuck off, Tom.", text);
+                console.log("ok: canTransformResult");
+            }
+        });
+}
+
 
 process.nextTick(simple);
 process.nextTick(exceptionHandling);
 process.nextTick(canSpecifyHttpAccepts);
 process.nextTick(canParseJson);
+process.nextTick(canTransformResult);
