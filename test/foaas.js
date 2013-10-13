@@ -38,6 +38,7 @@ function simple() {
 function exceptionHandling() {
     sc.get("not really a url", function(err, text) {
         if (err) {
+            assert.equal("request", err.action);
             console.log("ok: exceptionHandling");
         } else {
             assert.fail("no error returned");
@@ -104,6 +105,7 @@ function canHandleResponseErrors() {
     sc.get("http://127.0.0.1:" + (testLocalPortMin + 1), function(err, text) {
         serverReponseErr.close();
         if (err) {
+            assert.equal("response", err.action);
             console.log("ok: canHandleResponseErrors");
         } else {
             assert.fail("expected error");
@@ -117,8 +119,10 @@ function callbackGetsErrorsOfParseFunction() {
         },
         function(err, text) {
             if (err) {
-                assert.equal("test parse error", err.message);
+                assert.equal("test parse error", err.error.message);
+                assert.equal("parse", err.action);
                 console.log("ok: callbackGetsErrorsOfParseFunction");
+                console.log(err);
             } else {
                 assert.fail("expected error");
             }
