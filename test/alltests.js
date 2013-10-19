@@ -1,3 +1,3 @@
 require("./basic");
 require("./foaas");
-require("./mockedhttp");
+require("./mockedhttptest");
