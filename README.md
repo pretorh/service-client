@@ -1,7 +1,7 @@
 service-client
 =============
 
-javascript wrapper function for `http.request` that returns parsed, transformed data in callback.
+javascript wrapper function for `http.request` and `https.request` that returns parsed, transformed data in callback.
 
 ## API ##
 
@@ -16,20 +16,24 @@ javascript wrapper function for `http.request` that returns parsed, transformed 
     + `accept`: Accept request header (`string`). Defaults to `text/plain`
         - "text" or "plain" are changed to `text/plain`
         - "json" is changed to `application/json`
-    + `parse`: `function` used to parse the raw http result.
+        - "xml" is changed to `application/xml`
+    + `parse`: `function` used to parse the data returned from http(s) request. Default returns the data `Buffer` as-is in the callback
 
         Given 2 parameters:
-        - `buffer`: The `Buffer` that holds the raw http data
+        - `buffer`: The `Buffer` that holds the data returned from the http(s) request
         - `callback`: Callback `function` taking two paramers (`err`, `data`)
         
         If `parse` is a string, one of the internal parsers are returned:
         - "json": wraps `JSON.parse`
         - "raw": returns the data data as-is
-    + `transform`: `function` used to transform the parsed data. Given 2 parameters:
+    + `transform`: `function` used to transform the parsed data. Default returns the data as-is is the callback.
+        Given 2 parameters:
         - `data`: The data returned from the parse function
         - `callback`: Callback `function` taking two paramers (`err`, `data`)
-    
-    `parse` and `transform` defaults to parsers.plain (returning the data as-is)
+    + `protocol`: `string` to specify if http or https should be used. Default depends on protocol returned by
+        `url.parse`
+    + `http`: `function` used for `http.request`. Used for mocking
+    + `https`: `function` used for `https.request`. Used for mocking
 
 * callback
 
@@ -40,12 +44,32 @@ javascript wrapper function for `http.request` that returns parsed, transformed 
         + `action`: The action where the error occured (request, response, parse, transform)
         + `length`: The value of the `content-length` header
         + `received`: The number of bytes received so far
-        + `buffer`: The `Buffer` object that is used to hold the raw http data
+        + `buffer`: The `Buffer` object that is used to hold the data returned from the http(s) response
         + `parsed`: The parsed data
         
         If the `content-length` response header is not present, `length` will be `-1` (while transfering) or the number
         of bytes `received` when the `end` event is fired
     * `data`: The transformed data. `undefined` if an error has occured.
+
+### mock.Builder(options) ###
+Class to build http/https mocks
+
++ options:
+
+    + statusCode: `number` to use as the status code for the request. Defaults to `200`
+    + data: `text` to return for the request. Defaults to empty string
+
+#### mock.Builder.httpRequest(url, callback) ####
+Wrapper for `http.request` and `https.request`. Returns a new `mock.RequestMock` setup to call `callback` on `end`
+with a new `mock.ResponseMock`
+
+
+### mock.RequestMock(requestCallback, response) ###
++ requestCallback: The callback that will get the response object
++ response: The response object / `mock.ResponseMock` to return on `end`
+
+### mock.ResponseMock(dataToReturn) ###
++ dataToReturn: The data to return
 
 ## Dependencies ##
 - defaultify
