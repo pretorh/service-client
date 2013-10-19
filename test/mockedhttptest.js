@@ -7,7 +7,7 @@ function mockedHttp() {
     });
     
     sc.get("random url", {
-        _http: builder.httpRequest
+        http: builder.httpRequest
     },
     function(err, data) {
         if (err) {
@@ -26,11 +26,10 @@ function overwriteStatusCode() {
     });
     
     sc.get("random url", {
-        _http: builder.httpRequest
+        http: builder.httpRequest
     },
     function(err, data) {
         if (err) {
-            //assert.equal();
             assert.equal("non 2xx status code: 399", err.error.message);
             assert.equal("response", err.action);
             console.log("ok: overwriteStatusCode");
@@ -47,7 +46,7 @@ function canDetectAndUseHttps() {
     });
     
     sc.get("https://www.google.com", {
-        _https: builder.httpRequest
+        https: builder.httpRequest
     },
     function(err, data) {
         if (err) {
@@ -66,7 +65,7 @@ function canOverwriteProtocol() {
     });
     
     sc.get("www.google.com", {
-        _https: builder.httpRequest,
+        https: builder.httpRequest,
         protocol: "https"
     },
     function(err, data) {
