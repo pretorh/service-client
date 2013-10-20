@@ -1,7 +1,7 @@
 {
   "name": "service-client",
   "version": "0.0.1",
-  "description": "javascript wrapper function for http.request that returns parsed data in callback",
+  "description": "javascript wrapper function for http.request and https.request that returns parsed data in callback",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -12,7 +12,8 @@
   "keywords": [
     "service",
     "client",
-    "http"
+    "http",
+    "https"
   ],
   "author": "Hendri Pretorius",
   "license": "MIT",
