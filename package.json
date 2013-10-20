@@ -17,7 +17,7 @@
   "author": "Hendri Pretorius",
   "license": "MIT",
   "dependencies": {
-    "defaultify": "0.0.2"
+    "defaultify": "0.0.3"
   },
   "repository": {
     "type": "git",
