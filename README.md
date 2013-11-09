@@ -71,6 +71,10 @@ with a new `mock.ResponseMock`
 ### mock.ResponseMock(dataToReturn) ###
 + dataToReturn: The data to return
 
+### mock.get(rules) ###
++ rules: `object` where keys are the urls, and values are functions (taking a single `callback` function
+parameter) that is used to match incomming requests to the mock
+
 ## Dependencies ##
 - defaultify
 
