@@ -79,7 +79,48 @@ function canOverwriteProtocol() {
     });
 };
 
+function canMockServiceClient() {
+    var mock = sc.mocks.get({
+        "test": function(callback) {
+            callback(null, "hello");
+        },
+        "abc": function(callback) {
+            callback(null, "abc");
+        }
+    });
+
+    mock("test", function(err, data) {
+        if (err) {
+            console.log(err);
+            assert.fail("canMockServiceClient");
+        } else {
+            assert.equal("hello", data);
+            console.log("ok: canMockServiceClient: valid url 1");
+        }
+    });
+
+    mock("abc", {}, function(err, data) {
+        if (err) {
+            console.log(err);
+            assert.fail("canMockServiceClient");
+        } else {
+            assert.equal("abc", data);
+            console.log("ok: canMockServiceClient: valid url 2");
+        }
+    });
+
+    mock("not in list", function(err, data) {
+        if (err) {
+            console.log(err);
+            console.log("ok: canMockServiceClient: invalid");
+        } else {
+            assert.fail("canMockServiceClient: error not returned");
+        }
+    });
+}
+
 process.nextTick(mockedHttp);
 process.nextTick(overwriteStatusCode);
 process.nextTick(canDetectAndUseHttps);
 process.nextTick(canOverwriteProtocol);
+process.nextTick(canMockServiceClient);
