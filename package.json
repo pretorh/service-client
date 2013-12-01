@@ -1,6 +1,6 @@
 {
   "name": "service-client",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "javascript wrapper function for http.request and https.request that returns parsed data in callback",
   "main": "index.js",
   "directories": {
