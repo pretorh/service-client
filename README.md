@@ -3,6 +3,8 @@ service-client
 
 javascript wrapper function for `http.request` and `https.request` that returns parsed, transformed data in callback.
 
+This probject is archived - the features here can be achieved easily enough with something like [node-fetch](https://www.npmjs.com/package/node-fetch) and parsing the response.
+
 ## API ##
 
 ### get(url, _options_, callback) ###
